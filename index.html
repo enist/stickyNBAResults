@@ -12,12 +12,10 @@ html,body{width:480px;height:800px;overflow:hidden;background:#fff;color:#000;fo
 .screen{width:480px;height:800px;display:flex;flex-direction:column}
 
 /* HEADER */
-.header{background:#000;color:#fff;padding:14px 18px 12px;display:flex;align-items:flex-end;justify-content:space-between;flex-shrink:0}
-.title{font-size:34px;font-weight:800;letter-spacing:1px;line-height:1}
-.title small{font-size:15px;font-weight:700;letter-spacing:3px;color:#aaa;margin-left:6px}
-.date{text-align:right;line-height:1.1}
-.date b{display:block;font-size:20px;font-weight:800;letter-spacing:.5px}
-.date span{font-size:13px;font-weight:700;letter-spacing:2px;color:#aaa;text-transform:uppercase}
+.header{background:#000;color:#fff;padding:9px 18px 8px;display:flex;align-items:baseline;justify-content:space-between;flex-shrink:0}
+.title{font-size:30px;font-weight:800;letter-spacing:1px;line-height:1}
+.title small{font-size:14px;font-weight:700;letter-spacing:3px;color:#aaa;margin-left:6px}
+.date{font-size:22px;font-weight:800;letter-spacing:.5px;line-height:1}
 
 /* GAME LIST */
 .games{flex:1;display:flex;flex-direction:column;padding:0 18px;overflow:hidden}
@@ -28,15 +26,15 @@ html,body{width:480px;height:800px;overflow:hidden;background:#fff;color:#000;fo
 .abbr{font-size:var(--abbr);font-weight:800;letter-spacing:.5px}
 .name{display:block;font-size:var(--name);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-top:2px}
 .score{font-size:var(--score);font-weight:800;min-width:2.1em;text-align:center;font-variant-numeric:tabular-nums;line-height:1}
-.mid{text-align:center;font-size:13px;font-weight:700;letter-spacing:1px;line-height:1.2}
+.mid{text-align:center;font-size:15px;font-weight:700;letter-spacing:1px;line-height:1.2}
 .mid .tag{display:inline-block;background:#000;color:#fff;padding:1px 4px;margin-top:3px;font-size:11px}
-.lose{color:#777}
+.lose{color:#555}
 .lose .abbr,.lose.score{font-weight:500}
 
 /* size steps by game count */
-.games{--abbr:30px;--name:12px;--score:38px}
-.games.mid-n{--abbr:26px;--name:11px;--score:32px}
-.games.many{--abbr:22px;--name:0px;--score:26px}
+.games{--abbr:34px;--name:14px;--score:44px}
+.games.mid-n{--abbr:30px;--name:12px;--score:38px}
+.games.many{--abbr:28px;--name:0px;--score:34px}
 .games.many .name{display:none}
 
 /* EMPTY / ERROR */
@@ -52,7 +50,7 @@ html,body{width:480px;height:800px;overflow:hidden;background:#fff;color:#000;fo
 <div class="screen">
   <div class="header">
     <div class="title">NBA<small>SONUÇLAR</small></div>
-    <div class="date"><b id="date-main">—</b><span id="date-day"></span></div>
+    <div class="date" id="date-main">—</div>
   </div>
   <div class="games" id="games">
     <div class="message"><b>Yükleniyor…</b></div>
@@ -89,9 +87,7 @@ const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 
 function renderHeader(){
   const d=new Date(date+'T12:00:00');
-  $('date-main').textContent=d.toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'});
-  $('date-day').textContent=d.toLocaleDateString('tr-TR',{weekday:'long'});
-  $('updated').textContent='Güncelleme '+new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});
+  $('date-main').textContent=d.toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'});  $('updated').textContent='Güncelleme '+new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});
 }
 
 function message(title,sub){
