@@ -24,8 +24,7 @@ html,body{width:480px;height:800px;overflow:hidden;background:#fff;color:#000;fo
 .team{line-height:1}
 .team.home{text-align:right}
 .abbr{font-size:var(--abbr);font-weight:800;letter-spacing:.5px}
-.sub{display:block;font-size:var(--sub);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-top:2px;font-variant-numeric:tabular-nums}
-.sub .rec{font-weight:800}
+.sub{display:block;font-size:var(--sub);font-weight:800;letter-spacing:1px;margin-top:2px;font-variant-numeric:tabular-nums}
 .score{font-size:var(--score);font-weight:800;min-width:2.1em;text-align:center;font-variant-numeric:tabular-nums;line-height:1}
 .mid{text-align:center;font-size:15px;font-weight:700;letter-spacing:1px;line-height:1.2}
 .mid .tag{display:inline-block;background:#000;color:#fff;padding:1px 4px;margin-top:3px;font-size:11px}
@@ -33,10 +32,9 @@ html,body{width:480px;height:800px;overflow:hidden;background:#fff;color:#000;fo
 .lose .abbr,.lose.score{font-weight:500}
 
 /* size steps by game count */
-.games{--abbr:34px;--sub:15px;--score:44px}
-.games.mid-n{--abbr:30px;--sub:13px;--score:38px}
-.games.many{--abbr:26px;--sub:13px;--score:34px}
-.games.many .tname{display:none}
+.games{--abbr:34px;--sub:19px;--score:44px}
+.games.mid-n{--abbr:30px;--sub:17px;--score:38px}
+.games.many{--abbr:26px;--sub:15px;--score:34px}
 
 /* EMPTY / ERROR */
 .message{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 36px}
@@ -100,7 +98,7 @@ function gameRow(g){
   if(!final)mid='<span class="tag">'+(STATE_TR[g.status_state]||esc(g.status))+'</span>';
   const score=(s,cls)=>'<div class="score'+cls+'">'+(final||g.status_state==='in_progress'?s:'')+'</div>';
   const team=(t,cls)=>'<div class="team'+cls+'"><span class="abbr">'+esc(t.abbreviation)+'</span>'+
-    '<span class="sub"><span class="tname">'+esc(t.name)+' </span><span class="rec">'+esc(t.record)+'</span></span></div>';
+    '<span class="sub">'+esc(t.record)+'</span></div>';
   return '<div class="game" lang="en">'+
     team(v,vCls)+
     score(vs,vCls)+
