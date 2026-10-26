@@ -24,7 +24,8 @@ html,body{width:480px;height:800px;overflow:hidden;background:#fff;color:#000;fo
 .team{line-height:1}
 .team.home{text-align:right}
 .abbr{font-size:var(--abbr);font-weight:800;letter-spacing:.5px}
-.name{display:block;font-size:var(--name);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+.sub{display:block;font-size:var(--sub);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-top:2px;font-variant-numeric:tabular-nums}
+.sub .rec{font-weight:800}
 .score{font-size:var(--score);font-weight:800;min-width:2.1em;text-align:center;font-variant-numeric:tabular-nums;line-height:1}
 .mid{text-align:center;font-size:15px;font-weight:700;letter-spacing:1px;line-height:1.2}
 .mid .tag{display:inline-block;background:#000;color:#fff;padding:1px 4px;margin-top:3px;font-size:11px}
@@ -32,10 +33,10 @@ html,body{width:480px;height:800px;overflow:hidden;background:#fff;color:#000;fo
 .lose .abbr,.lose.score{font-weight:500}
 
 /* size steps by game count */
-.games{--abbr:34px;--name:14px;--score:44px}
-.games.mid-n{--abbr:30px;--name:12px;--score:38px}
-.games.many{--abbr:28px;--name:0px;--score:34px}
-.games.many .name{display:none}
+.games{--abbr:34px;--sub:15px;--score:44px}
+.games.mid-n{--abbr:30px;--sub:13px;--score:38px}
+.games.many{--abbr:26px;--sub:13px;--score:34px}
+.games.many .tname{display:none}
 
 /* EMPTY / ERROR */
 .message{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 36px}
@@ -61,33 +62,25 @@ html,body{width:480px;height:800px;overflow:hidden;background:#fff;color:#000;fo
   </div>
 </div>
 <script>
-// balldontlie API anahtarı. Buraya yazın ya da URL'de ?key=... olarak verin.
-const API_KEY='';
+// Veriler her sabah GitHub Actions'ın ürettiği data.json'dan okunur (scripts/fetch-data.mjs).
 const params=new URLSearchParams(location.search);
-const key=params.get('key')||API_KEY;
 
-// NBA maç tarihleri ABD Doğu saatine göredir; "dün" o saat dilimine göre hesaplanır.
-function yesterdayET(){
-  const now=new Date(Date.now()-86400000);
-  return new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).format(now);
-}
-const date=params.get('date')||yesterdayET();
-
-const DEMO=[
-  {visitor_team:{abbreviation:'BOS',name:'Celtics'},home_team:{abbreviation:'NYK',name:'Knicks'},visitor_team_score:112,home_team_score:108,period:4,status_state:'final'},
-  {visitor_team:{abbreviation:'GSW',name:'Warriors'},home_team:{abbreviation:'LAL',name:'Lakers'},visitor_team_score:121,home_team_score:124,period:5,status_state:'final'},
-  {visitor_team:{abbreviation:'MIA',name:'Heat'},home_team:{abbreviation:'MIL',name:'Bucks'},visitor_team_score:99,home_team_score:117,period:4,status_state:'final'},
-  {visitor_team:{abbreviation:'DEN',name:'Nuggets'},home_team:{abbreviation:'OKC',name:'Thunder'},visitor_team_score:130,home_team_score:126,period:6,status_state:'final'},
-  {visitor_team:{abbreviation:'PHX',name:'Suns'},home_team:{abbreviation:'DAL',name:'Mavericks'},visitor_team_score:104,home_team_score:110,period:4,status_state:'final'},
-  {visitor_team:{abbreviation:'SAS',name:'Spurs'},home_team:{abbreviation:'MIN',name:'Timberwolves'},visitor_team_score:0,home_team_score:0,period:0,status_state:'postponed'}
-];
+const DEMO={date:'2026-10-21',updated:new Date().toISOString(),games:[
+  {visitor_team:{abbreviation:'BOS',name:'Celtics',record:'3-1'},home_team:{abbreviation:'NYK',name:'Knicks',record:'2-2'},visitor_team_score:112,home_team_score:108,period:4,status_state:'final'},
+  {visitor_team:{abbreviation:'GSW',name:'Warriors',record:'1-3'},home_team:{abbreviation:'LAL',name:'Lakers',record:'4-0'},visitor_team_score:121,home_team_score:124,period:5,status_state:'final'},
+  {visitor_team:{abbreviation:'MIA',name:'Heat',record:'0-4'},home_team:{abbreviation:'MIL',name:'Bucks',record:'3-1'},visitor_team_score:99,home_team_score:117,period:4,status_state:'final'},
+  {visitor_team:{abbreviation:'DEN',name:'Nuggets',record:'3-0'},home_team:{abbreviation:'OKC',name:'Thunder',record:'2-1'},visitor_team_score:130,home_team_score:126,period:6,status_state:'final'},
+  {visitor_team:{abbreviation:'PHX',name:'Suns',record:'1-2'},home_team:{abbreviation:'DAL',name:'Mavericks',record:'2-1'},visitor_team_score:104,home_team_score:110,period:4,status_state:'final'},
+  {visitor_team:{abbreviation:'SAS',name:'Spurs',record:'2-1'},home_team:{abbreviation:'MIN',name:'Timberwolves',record:'1-2'},visitor_team_score:0,home_team_score:0,period:0,status_state:'postponed'}
+]};
 
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-function renderHeader(){
-  const d=new Date(date+'T12:00:00');
-  $('date-main').textContent=d.toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'});  $('updated').textContent='Güncelleme '+new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'});
+function renderHeader(data){
+  const d=new Date(data.date+'T12:00:00');
+  $('date-main').textContent=d.toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'});
+  $('updated').textContent='Güncelleme '+new Date(data.updated).toLocaleString('tr-TR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
 }
 
 function message(title,sub){
@@ -106,12 +99,14 @@ function gameRow(g){
   if(final&&g.period>4)mid+='<br><span class="tag">'+(g.period===5?'OT':(g.period-4)+'OT')+'</span>';
   if(!final)mid='<span class="tag">'+(STATE_TR[g.status_state]||esc(g.status))+'</span>';
   const score=(s,cls)=>'<div class="score'+cls+'">'+(final||g.status_state==='in_progress'?s:'')+'</div>';
+  const team=(t,cls)=>'<div class="team'+cls+'"><span class="abbr">'+esc(t.abbreviation)+'</span>'+
+    '<span class="sub"><span class="tname">'+esc(t.name)+' </span><span class="rec">'+esc(t.record)+'</span></span></div>';
   return '<div class="game" lang="en">'+
-    '<div class="team'+vCls+'"><span class="abbr">'+esc(v.abbreviation)+'</span><span class="name">'+esc(v.name)+'</span></div>'+
+    team(v,vCls)+
     score(vs,vCls)+
     '<div class="mid">'+mid+'</div>'+
     score(hs,hCls)+
-    '<div class="team home'+hCls+'"><span class="abbr">'+esc(h.abbreviation)+'</span><span class="name">'+esc(h.name)+'</span></div>'+
+    team(h,' home'+hCls)+
   '</div>';
 }
 
@@ -126,15 +121,15 @@ function render(games){
 }
 
 async function load(){
-  renderHeader();
-  if(params.has('demo'))return render(DEMO);
-  if(!key)return message('API anahtarı yok','index.html içindeki API_KEY alanını doldurun veya adrese ?key=… ekleyin.');
   try{
-    const r=await fetch('https://api.balldontlie.io/nba/v1/games?per_page=100&dates[]='+date,{headers:{Authorization:key}});
-    if(r.status===401)return message('Geçersiz anahtar','balldontlie API anahtarını kontrol edin.');
-    if(r.status===429)return message('Çok fazla istek','Bir dakika sonra tekrar denenecek.');
-    if(!r.ok)throw new Error('HTTP '+r.status);
-    render((await r.json()).data||[]);
+    let data=DEMO;
+    if(!params.has('demo')){
+      const r=await fetch('data.json?t='+Date.now());
+      if(!r.ok)throw new Error('data.json: HTTP '+r.status);
+      data=await r.json();
+    }
+    renderHeader(data);
+    render(data.games);
   }catch(e){
     message('Veri alınamadı',e.message);
   }

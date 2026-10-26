@@ -1,13 +1,18 @@
-# index.html'i her main push'unda GitHub Pages'e yayınlar
+# Her sabah data.json'u balldontlie'dan yeniden üretir, commit'ler ve sayfayı GitHub Pages'e yayınlar.
+# main'e yapılan push'larda veri çekilmez, mevcut data.json ile yalnızca yayın yapılır.
 name: Deploy static content to Pages
 
 on:
   push:
     branches: ["main"]
+  schedule:
+    # 06:30 UTC (09:30 TR) ilk çekim; 09:00 UTC (12:00 TR) geç biten maçlar için tekrar
+    - cron: "30 6 * * *"
+    - cron: "0 9 * * *"
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -24,6 +29,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Setup Node
+        if: github.event_name != 'push'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Fetch NBA data
+        if: github.event_name != 'push'
+        env:
+          BDL_API_KEY: ${{ secrets.BDL_API_KEY }}
+        run: node scripts/fetch-data.mjs
+      - name: Commit data.json
+        if: github.event_name != 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data.json
+          git diff --cached --quiet || { git commit -m "data.json güncellendi"; git push; }
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
