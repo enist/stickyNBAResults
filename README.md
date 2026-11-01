@@ -5,7 +5,7 @@ reTerminal Sticky'nin 480x800 siyah-beyaz ekranı için, bir önceki günün (AB
 ## Nasıl çalışır
 
 - `scripts/fetch-data.mjs`, [balldontlie](https://www.balldontlie.io) API'sinin `/nba/v1/games` uç noktasından sezonun dünkü tarihe kadarki tüm maçlarını çeker, normal sezon rekorlarını hesaplar ve dünün maçlarını `data.json` dosyasına yazar. Ücretsiz plan dakikada 5 istek verdiği için sayfalar arasında 13 sn bekler (sezon sonunda ~13 istek, ~3 dk).
-- GitHub Actions bu script'i her gün 06:30 ve 09:00 UTC'de (09:30 / 12:00 TR) çalıştırır, `data.json`'u commit'ler ve sayfayı GitHub Pages'e yayınlar.
+- GitHub Actions bu script'i her gün 06:17 ve 09:23 UTC'de (09:17 / 12:23 TR) çalıştırır, `data.json`'u commit'ler ve sayfayı GitHub Pages'e yayınlar. Bu saatler hedeftir; GitHub zamanlanmış işleri geciktirebilir (daha önceki `:00`/`:30` saatlerinde 6-7 saat gecikme görüldü).
 - `index.html` yalnızca `data.json`'u okur; API'ye istek atmaz, API anahtarı sayfada yer almaz.
 
 ## Kurulum
