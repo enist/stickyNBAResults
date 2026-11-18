@@ -1,6 +1,6 @@
 {
  "date": "2026-11-17",
- "updated": "2026-11-18T06:31:16.978Z",
+ "updated": "2026-11-18T09:31:16.836Z",
  "games": [
   {
    "datetime": "2026-11-18T00:30:00.000Z",
@@ -61,22 +61,22 @@
   },
   {
    "datetime": "2026-11-18T04:00:00.000Z",
-   "status": "4th Qtr",
-   "status_state": "in_progress",
-   "period": 4,
+   "status": "Final",
+   "status_state": "final",
+   "period": 5,
    "postseason": false,
    "visitor_team": {
     "abbreviation": "CHA",
     "name": "Hornets",
-    "record": "4-9"
+    "record": "4-10"
    },
    "home_team": {
     "abbreviation": "LAL",
     "name": "Lakers",
-    "record": "12-2"
+    "record": "13-2"
    },
-   "visitor_team_score": 107,
-   "home_team_score": 106
+   "visitor_team_score": 114,
+   "home_team_score": 118
   },
   {
    "datetime": "2026-11-18T03:30:00.000Z",
