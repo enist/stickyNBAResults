@@ -28,8 +28,11 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      # Re-run'lar da çalışmanın eski commit'i yerine güncel main üzerinde çalışsın
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Setup Node
         if: github.event_name != 'push'
         uses: actions/setup-node@v4
@@ -46,7 +49,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data.json
-          git diff --cached --quiet || { git commit -m "data.json güncellendi"; git push; }
+          # Çalışma sırasında main ilerlediyse üstüne al; çakışmada yeni data.json kazanır
+          git diff --cached --quiet || { git commit -m "data.json güncellendi"; git pull --rebase -X theirs origin main; git push; }
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
