@@ -25,7 +25,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url || steps.deployment_retry.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       # Re-run'lar da çalışmanın eski commit'i yerine güncel main üzerinde çalışsın
@@ -57,6 +57,18 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
+      # Yüklenen paket GitHub'da birkaç saniye görünmeyebiliyor ("No artifacts named github-pages"):
+      # https://github.com/actions/deploy-pages/pull/455. Önce bekle, yine düşerse bir kez daha dene.
+      - name: Wait for artifact
+        run: sleep 15
       - name: Deploy to GitHub Pages
         id: deployment
+        continue-on-error: true
+        uses: actions/deploy-pages@v4
+      - name: Wait before retry
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 30
+      - name: Deploy to GitHub Pages (retry)
+        id: deployment_retry
+        if: steps.deployment.outcome == 'failure'
         uses: actions/deploy-pages@v4
