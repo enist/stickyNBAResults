@@ -1,63 +1,177 @@
 {
- "date": "2026-11-24",
- "updated": "2026-11-25T19:24:47.057Z",
+ "date": "2026-11-25",
+ "updated": "2026-11-26T06:31:15.710Z",
  "games": [
   {
-   "datetime": "2026-11-25T00:00:00.000Z",
+   "datetime": "2026-11-25T22:00:00.000Z",
    "status": "Final",
    "status_state": "final",
    "period": 4,
    "postseason": false,
    "visitor_team": {
-    "abbreviation": "DET",
-    "name": "Pistons",
-    "record": "11-6"
+    "abbreviation": "MIA",
+    "name": "Heat",
+    "record": "10-7"
    },
    "home_team": {
-    "abbreviation": "ORL",
-    "name": "Magic",
-    "record": "7-10"
+    "abbreviation": "PHI",
+    "name": "76ers",
+    "record": "15-4"
    },
    "visitor_team_score": 104,
-   "home_team_score": 86
+   "home_team_score": 111
   },
   {
-   "datetime": "2026-11-25T01:00:00.000Z",
+   "datetime": "2026-11-26T00:00:00.000Z",
    "status": "Final",
    "status_state": "final",
    "period": 4,
    "postseason": false,
    "visitor_team": {
-    "abbreviation": "BOS",
-    "name": "Celtics",
-    "record": "12-6"
+    "abbreviation": "CHI",
+    "name": "Bulls",
+    "record": "6-12"
    },
    "home_team": {
-    "abbreviation": "WAS",
-    "name": "Wizards",
-    "record": "7-12"
+    "abbreviation": "CHA",
+    "name": "Hornets",
+    "record": "4-13"
    },
-   "visitor_team_score": 131,
+   "visitor_team_score": 107,
+   "home_team_score": 105
+  },
+  {
+   "datetime": "2026-11-26T00:30:00.000Z",
+   "status": "Final",
+   "status_state": "final",
+   "period": 4,
+   "postseason": false,
+   "visitor_team": {
+    "abbreviation": "CLE",
+    "name": "Cavaliers",
+    "record": "9-10"
+   },
+   "home_team": {
+    "abbreviation": "NYK",
+    "name": "Knicks",
+    "record": "12-6"
+   },
+   "visitor_team_score": 102,
+   "home_team_score": 121
+  },
+  {
+   "datetime": "2026-11-26T00:30:00.000Z",
+   "status": "Final",
+   "status_state": "final",
+   "period": 4,
+   "postseason": false,
+   "visitor_team": {
+    "abbreviation": "MIN",
+    "name": "Timberwolves",
+    "record": "14-5"
+   },
+   "home_team": {
+    "abbreviation": "OKC",
+    "name": "Thunder",
+    "record": "10-9"
+   },
+   "visitor_team_score": 113,
+   "home_team_score": 106
+  },
+  {
+   "datetime": "2026-11-26T01:00:00.000Z",
+   "status": "Final",
+   "status_state": "final",
+   "period": 4,
+   "postseason": false,
+   "visitor_team": {
+    "abbreviation": "LAC",
+    "name": "Clippers",
+    "record": "4-13"
+   },
+   "home_team": {
+    "abbreviation": "MEM",
+    "name": "Grizzlies",
+    "record": "14-5"
+   },
+   "visitor_team_score": 97,
+   "home_team_score": 115
+  },
+  {
+   "datetime": "2026-11-26T01:00:00.000Z",
+   "status": "Final",
+   "status_state": "final",
+   "period": 4,
+   "postseason": false,
+   "visitor_team": {
+    "abbreviation": "BKN",
+    "name": "Nets",
+    "record": "4-13"
+   },
+   "home_team": {
+    "abbreviation": "MIL",
+    "name": "Bucks",
+    "record": "2-17"
+   },
+   "visitor_team_score": 104,
+   "home_team_score": 97
+  },
+  {
+   "datetime": "2026-11-26T01:30:00.000Z",
+   "status": "Final",
+   "status_state": "final",
+   "period": 4,
+   "postseason": false,
+   "visitor_team": {
+    "abbreviation": "PHX",
+    "name": "Suns",
+    "record": "9-8"
+   },
+   "home_team": {
+    "abbreviation": "HOU",
+    "name": "Rockets",
+    "record": "14-5"
+   },
+   "visitor_team_score": 104,
    "home_team_score": 116
   },
   {
-   "datetime": "2026-11-25T03:00:00.000Z",
+   "datetime": "2026-11-26T03:00:00.000Z",
    "status": "Final",
    "status_state": "final",
    "period": 4,
    "postseason": false,
    "visitor_team": {
-    "abbreviation": "DAL",
-    "name": "Mavericks",
-    "record": "11-7"
+    "abbreviation": "SAC",
+    "name": "Kings",
+    "record": "2-16"
    },
    "home_team": {
-    "abbreviation": "DEN",
-    "name": "Nuggets",
-    "record": "10-6"
+    "abbreviation": "GSW",
+    "name": "Warriors",
+    "record": "10-8"
    },
-   "visitor_team_score": 120,
-   "home_team_score": 101
+   "visitor_team_score": 110,
+   "home_team_score": 129
+  },
+  {
+   "datetime": "2026-11-26T03:00:00.000Z",
+   "status": "Final",
+   "status_state": "final",
+   "period": 4,
+   "postseason": false,
+   "visitor_team": {
+    "abbreviation": "SAS",
+    "name": "Spurs",
+    "record": "15-4"
+   },
+   "home_team": {
+    "abbreviation": "POR",
+    "name": "Trail Blazers",
+    "record": "12-6"
+   },
+   "visitor_team_score": 111,
+   "home_team_score": 116
   }
  ]
 }
